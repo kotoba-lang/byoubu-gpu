@@ -1,0 +1,41 @@
+{:paths ["src"]
+ ;; The opt-in tier. byoubu and byoubu-ui deliberately never reach the render
+ ;; stack — a page that wants a plate and legible text must not inherit it.
+ ;; This repo is where an app opts INTO the GPU, so the dependency lives here
+ ;; and nowhere upstream of it.
+ ;;
+ ;; kami.wgsl is the WGSL-as-data SSoT (zero browser deps, .cljc — which is
+ ;; what lets shader generation be unit-tested without a GPU). kami.webgpu is
+ ;; the canonical browser executor; it is a :local/root sibling because that is
+ ;; how the whole kami stack wires itself.
+ :deps {io.github.kotoba-lang/byoubu {:local/root "../byoubu"}
+        io.github.kotoba-lang/wgsl   {:local/root "../wgsl"}
+        io.github.kotoba-lang/expr   {:local/root "../expr"}}
+ :aliases
+ {;; The browser half only. Split out so `clojure -M:test` — which runs the
+  ;; shader/uniform/graph layers — does not drag 22 sibling checkouts in.
+  ;; :override-deps pins the diamond back to sibling checkouts. webgpu and host
+  ;; reach physics via :local/root while physics-2d pins it by :git/sha, and
+  ;; tools.deps cannot compare a git coordinate with a local one — it errors
+  ;; rather than guessing. Overriding is the documented resolution and keeps
+  ;; the whole tree on one tree of sources, which is what the kami stack's
+  ;; all-:local/root convention already assumes.
+  :browser {:extra-paths ["src-browser"]
+            :extra-deps {io.github.kotoba-lang/webgpu {:local/root "../webgpu"}
+                         ;; shadow-cljs itself: shadow-cljs.edn delegates the
+                         ;; classpath to this alias, so the compiler has to be
+                         ;; a dependency of it (same shape as dom-gpu's :cljs).
+                         thheller/shadow-cljs {:mvn/version "2.28.23"}}
+            :override-deps {io.github.kotoba-lang/physics {:local/root "../physics"}
+                            io.github.kotoba-lang/physics-2d {:local/root "../physics-2d"}}}
+
+  :test {:extra-paths ["test"]
+         :extra-deps {org.clojure/clojure {:mvn/version "1.11.1"}
+                      io.github.cognitect-labs/test-runner
+                      {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
+         :main-opts ["-m" "cognitect.test-runner"]
+         :exec-fn cognitect.test-runner.api/test}
+
+  :lint {:replace-deps {clj-kondo/clj-kondo {:mvn/version "2024.11.14"}}
+         :main-opts ["-m" "clj-kondo.main" "--lint" "src" "test"
+                     "--fail-level" "error"]}}}

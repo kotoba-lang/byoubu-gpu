@@ -1,0 +1,3 @@
+;; Sibling checkouts on :paths — nbb does not resolve :deps from deps.edn.
+;; The browser half (src-browser) is NOT here: it needs a real GPU.
+{:paths ["src" "test" "../byoubu/src" "../wgsl/src" "../expr/src"]}

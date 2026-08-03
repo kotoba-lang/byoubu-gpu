@@ -1,0 +1,9 @@
+{
+  "name": "byoubu-gpu",
+  "private": true,
+  "scripts": {
+    "compile:demo": "shadow-cljs compile demo",
+    "release:demo": "shadow-cljs release demo"
+  },
+  "devDependencies": {"shadow-cljs": "^2.28.23"}
+}
