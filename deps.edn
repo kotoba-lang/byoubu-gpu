@@ -8,7 +8,12 @@
  ;; what lets shader generation be unit-tested without a GPU). kami.webgpu is
  ;; the canonical browser executor; it is a :local/root sibling because that is
  ;; how the whole kami stack wires itself.
- :deps {io.github.kotoba-lang/byoubu {:local/root "../byoubu"}
+ :deps {
+        ;; kotoba.lang.text, not clojure.string. Pinned as an explicit floor:
+        ;; tools.deps takes the NEWEST sha it is shown, so without a floor here
+        ;; this repo silently rides whatever a sibling happens to name.
+        io.github.kotoba-lang/text {:git/sha "73bdb13ae7a3d004b44bca08be03a3191157a38f"}
+       io.github.kotoba-lang/byoubu {:local/root "../byoubu"}
         io.github.kotoba-lang/wgsl   {:local/root "../wgsl"}
         io.github.kotoba-lang/expr   {:local/root "../expr"}}
  :aliases

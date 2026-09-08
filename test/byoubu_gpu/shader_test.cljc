@@ -7,7 +7,7 @@
   graph speaks the executor's vocabulary rather than a plausible-looking one
   of its own."
   (:require [clojure.test :refer [deftest is testing]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [byoubu.core :as byoubu]
             [byoubu.plate :as plate]
             [byoubu-gpu.shader :as shader]
