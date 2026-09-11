@@ -77,7 +77,7 @@ complete backdrop rather than a blank canvas.
 ## Tests
 
 ```bash
-nbb bin/test.cljs      # ClojureScript
+nbb bin/test.cljk      # ClojureScript
 clojure -M:test        # JVM
 ```
 
