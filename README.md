@@ -77,16 +77,16 @@ complete backdrop rather than a blank canvas.
 ## Tests
 
 ```bash
-nbb bin/test.cljk      # ClojureScript
-clojure -M:test        # JVM
+kbb --backend sci bin/test.cljk      # ClojureScript
+kbb -M:test        # JVM
 ```
 
 Browser build (through the workspace resource governor, which serialises heavy
 builds across all sessions):
 
 ```bash
-node ../../../scripts/resource-guard.mjs run build -- npx shadow-cljs compile demo
-npx shadow-cljs watch demo    # http://localhost:8793
+node ../../../scripts/resource-guard.mjs run build -- amu compile --target wasm32-browser demo
+amu compile --target wasm32-browser demo    # http://localhost:8793
 ```
 
 See `docs/adr/0001-byoubu-gpu.md`.

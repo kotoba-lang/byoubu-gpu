@@ -17,7 +17,7 @@
         io.github.kotoba-lang/wgsl   {:local/root "../wgsl"}
         io.github.kotoba-lang/expr   {:local/root "../expr"}}
  :aliases
- {;; The browser half only. Split out so `clojure -M:test` — which runs the
+ {;; The browser half only. Split out so `kbb -M:test` — which runs the
   ;; shader/uniform/graph layers — does not drag 22 sibling checkouts in.
   ;; :override-deps pins the diamond back to sibling checkouts. webgpu and host
   ;; reach physics via :local/root while physics-2d pins it by :git/sha, and

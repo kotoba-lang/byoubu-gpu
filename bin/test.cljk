@@ -1,5 +1,5 @@
 (ns test
-  "nbb test entry: `nbb bin/test.cljk`. Covers shader generation, uniform
+  "nbb test entry: `kbb --backend sci bin/test.cljk`. Covers shader generation, uniform
   packing and the render graph — every layer that does not need a GPU."
   (:require [clojure.test :as t]
             [byoubu-gpu.shader-test]))
