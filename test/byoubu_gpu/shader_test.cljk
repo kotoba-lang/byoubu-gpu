@@ -6,7 +6,7 @@
   packs, that the three tiers agree on where the horizon is, and that the
   graph speaks the executor's vocabulary rather than a plausible-looking one
   of its own."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [kotoba.lang.text :as str]
             [byoubu.core :as byoubu]
             [byoubu.plate :as plate]
